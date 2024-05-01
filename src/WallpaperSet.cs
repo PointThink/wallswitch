@@ -1,4 +1,4 @@
-﻿namespace wallswitch;
+﻿namespace Wallswitch;
 
 public class WallpaperSet
 {
@@ -19,6 +19,6 @@ public class WallpaperSet
 
     public string PickRandomWallpaper()
     {
-        return _wallpaperImagePaths[random.Next(0, _wallpaperImagePaths.Count - 1)];
+        return _wallpaperImagePaths[random.Next(0, _wallpaperImagePaths.Count)];
     }
 }

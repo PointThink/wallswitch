@@ -2,7 +2,7 @@
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace wallswitch;
+namespace Wallswitch;
 
 class WallpaperSetInfo
 {

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace wallswitch;
+namespace Wallswitch;
 
 public static class Setter
 {
@@ -14,6 +14,10 @@ public static class Setter
                 SetWallpaperGNOME(path);
                 break;
 
+            case "mate":
+                SetWallpaperMATE(path);
+                break;
+
             default:
                 throw new Exception("Unsupported desktop environment");
         }
@@ -23,14 +27,25 @@ public static class Setter
     {
         Process process = new Process();
 		process.StartInfo.FileName = "gsettings";
-		process.StartInfo.Arguments = $"set org.gnome.desktop.background picture-uri file://{path}";
+		process.StartInfo.Arguments = $"set org.gnome.desktop.background picture-uri \"file://{path}\"";
 		process.StartInfo.UseShellExecute = false;
 	
         process.Start();
         process.WaitForExit();
 
-        process.StartInfo.Arguments = $"set org.gnome.desktop.background picture-uri-dark file://{path}";
+        process.StartInfo.Arguments = $"set org.gnome.desktop.background picture-uri-dark \"file://{path}\"";
 
+        process.Start();
+        process.WaitForExit();
+    }
+
+    private static void SetWallpaperMATE(string path)
+    {
+        Process process = new Process();
+		process.StartInfo.FileName = "dconf";
+		process.StartInfo.Arguments = $"write /org/mate/desktop/background/picture-filename \"'{path}'\"";
+		process.StartInfo.UseShellExecute = false;
+	
         process.Start();
         process.WaitForExit();
     }

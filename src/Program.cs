@@ -1,6 +1,4 @@
-﻿using wallswitch;
-
-namespace Wallswitch;
+﻿namespace Wallswitch;
 
 static class Program
 {
