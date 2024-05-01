@@ -1,0 +1,4 @@
+# this config goes in ~/.local/share/wallswitch/config.yaml
+
+wallpaper_set_name:
+  directory: 'directory-goes-here'

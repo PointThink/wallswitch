@@ -6,7 +6,9 @@ static class Program
 {
     static void Main(string[] args)
     {
-        WallpaperSet set = new(["/home/pt/wallpapers/other"]);
+        
+        Dictionary<string, WallpaperSet> sets = Config.GetSetsFromConfig();
+        WallpaperSet set = sets[args[0]];
 
         Setter.SetWallpaper(set.PickRandomWallpaper());
     }
