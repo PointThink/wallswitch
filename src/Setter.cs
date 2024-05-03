@@ -18,6 +18,10 @@ public static class Setter
                 SetWallpaperMATE(path);
                 break;
 
+            case "plasma":
+                SetWallpaperPlasma(path);
+                break;
+
             default:
                 throw new Exception("Unsupported desktop environment");
         }
@@ -48,5 +52,22 @@ public static class Setter
 	
         process.Start();
         process.WaitForExit();
+    }
+
+    private static void SetWallpaperPlasma(string path)
+    {
+        Process process = new Process();
+		process.StartInfo.FileName = "/usr/bin/qdbus";
+		process.StartInfo.ArgumentList.Add("org.kde.plasmashell");
+        process.StartInfo.ArgumentList.Add("/PlasmaShell");
+        process.StartInfo.ArgumentList.Add("org.kde.PlasmaShell.evaluateScript");
+        process.StartInfo.ArgumentList.Add($"var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {{d = allDesktops[i];d.wallpaperPlugin = \"org.kde.image\";d.currentConfigGroup = Array(\"Wallpaper\", \"org.kde.image\", \"General\");d.writeConfig(\"Image\", \"file://{path}\")}}");
+
+		process.StartInfo.UseShellExecute = false;
+        
+        process.Start();
+        process.WaitForExit();
+
+        Console.WriteLine(process.ExitCode);
     }
 }
